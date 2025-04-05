@@ -1,0 +1,6 @@
+flask
+psycopg2-binary  # PostgreSQL adapter
+flask-sqlalchemy
+torch
+pillow
+gunicorn

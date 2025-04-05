@@ -4,3 +4,5 @@ flask-sqlalchemy
 torch
 pillow
 gunicorn
+torchvision
+numpy

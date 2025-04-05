@@ -96,7 +96,7 @@ model.eval()  # Set to evaluation mode
 
 @app.route('/')
 def home():
-    return "Welcome to the Cotton Disease Classification API!"
+    return "koushik erri***ka!!"
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -1,1 +1,1 @@
-# cotton-server
+# cotton leaf disease detection.

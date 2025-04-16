@@ -43,5 +43,24 @@ def get_image(image_id):
     if result and result[0]:
         return Response(result[0], mimetype='image/jpeg')
     return "Image not found", 404
+
+from flask import Flask, request, jsonify
+from gradio_client import Client, handle_file
+import tempfile
+
+# Scan image page
+@app.route('/scan-image-page')
+def scan_image_page():
+    return render_template('scan_image.html')
+
+# API endpoint for processing the image
+@app.route("/scan-image", methods=["POST"])
+def scan_image():
+    image = request.files["image"]
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp:
+        image.save(temp.name)
+        client = Client("RohithAttoli/cotton-server")
+        result = client.predict(image=handle_file(temp.name), api_name="/predict")
 if __name__ == "__main__":
     app.run(debug=True)

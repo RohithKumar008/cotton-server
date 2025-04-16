@@ -7,3 +7,4 @@ gunicorn
 torchvision
 numpy
 psycopg2-binary
+gradio_client

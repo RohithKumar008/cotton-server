@@ -62,5 +62,37 @@ def scan_image():
         image.save(temp.name)
         client = Client("RohithAttoli/cotton-server")
         result = client.predict(image=handle_file(temp.name), api_name="/predict")
+
+from gradio_client import Client, handle_file
+import tempfile
+import os
+
+# ✅ Load only once when the server starts
+client = Client("RohithAttoli/cotton-server")
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'image' in request.files:
+        image = request.files['image']
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
+            image.save(temp.name)
+
+            try:
+                # ✅ Use preloaded client
+                result = client.predict(image=handle_file(temp.name), api_name="/predict")
+                print("✅ Prediction:", result)
+                return jsonify({"result": result})
+            except Exception as e:
+                print("❌ Prediction error:", e)
+                return jsonify({"error": "Prediction failed"}), 500
+            finally:
+                os.unlink(temp.name)
+
+    elif request.json and 'message' in request.json:
+        print(f"⚠️ {request.json['message']}")
+        return jsonify({"status": "offline message received"}), 200
+    else:
+        return jsonify({"error": "No image or message"}), 400
 if __name__ == "__main__":
     app.run(debug=True)

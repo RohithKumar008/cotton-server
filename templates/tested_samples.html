@@ -59,15 +59,19 @@
                 <th>Timestamp</th>
                 <th>Prediction</th>
                 <th>Confidence</th>
+                <th>latitude</th>
+                <th>longitude</th>
             </tr>
         </thead>
         <tbody>
-            {% for id, timestamp, prediction, confidence in data %}
+            {% for id, timestamp, prediction, confidence, latitude, longitude in data %}
             <tr>
                 <td><img src="{{ url_for('get_image', image_id=id) }}" alt="cotton image" width="150"></td>
                 <td>{{ timestamp }}</td>
                 <td>{{ prediction }}</td>
                 <td>{{ confidence }}</td>
+                <td>{{ latitude }}</td>
+                <td>{{ longitude }}</td>
             </tr>
             {% endfor %}
         </tbody>

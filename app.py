@@ -62,6 +62,7 @@ def scan_image():
         image.save(temp.name)
         client = Client("RohithAttoli/cotton-server")
         result = client.predict(image=handle_file(temp.name), api_name="/predict")
+    return jsonify({"output": result})
 
 from gradio_client import Client, handle_file
 import tempfile

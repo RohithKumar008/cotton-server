@@ -8,3 +8,5 @@ torchvision
 numpy
 psycopg2-binary
 gradio_client
+folium
+geopy

@@ -39,7 +39,7 @@ def home():
 def tested_samples():
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, timestamp, prediction, confidence FROM image_results;")
+    cursor.execute("SELECT id, timestamp, prediction, confidence, latitude, longitude FROM image_results;")
     rows = cursor.fetchall()
     conn.close()
     return render_template('tested_samples.html', data=rows)

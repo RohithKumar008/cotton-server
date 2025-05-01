@@ -67,7 +67,7 @@ def scan_image():
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp:
         image.save(temp.name)
-        result = client.predict(image=handle_file(temp.name), api_name="/predict")
+        result = client.predict(image=handle_file(temp.name), latitude="", longitude="", fn_index=0)
 
     return jsonify({"output": result})
 
@@ -79,7 +79,7 @@ def upload():
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
             image.save(temp.name)
             try:
-                result = client.predict(image=handle_file(temp.name), api_name="/predict")
+                result = client.predict(image=handle_file(temp.name), latitude="", longitude="", fn_index=0)
                 print("✅ Prediction:", result)
                 return jsonify({"result": result})
             except Exception as e:
